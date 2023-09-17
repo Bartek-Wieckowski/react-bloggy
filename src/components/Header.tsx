@@ -1,16 +1,22 @@
 import facebook from "../assets/icons/facebook-logo-thin.svg";
 import youtube from "../assets/icons/youtube-logo-thin.svg";
 import instagram from "../assets/icons/instagram-logo-thin.svg";
+import { useState } from "react";
+
 export default function Header() {
-  const generateHamburger = `h-1 w-6 my-1 rounded-full bg-black transition ease transform duration-300`;
+  const [isOpen, setIsOpen] = useState(false);
+  const generateHamburgerLine = `h-1 w-6 my-1 rounded-full bg-black transition ease transform duration-300`;
 
   return (
-    <div className="flex justify-between container mx-auto px-4">
+    <div className="flex justify-between items-center container mx-auto px-4">
       <div className="flex md:hidden">
-        <button className="h-12 w-12 px-2 flex flex-col justify-center items-center group ">
-          <div className={`${generateHamburger} w-3 mr-auto`}></div>
-          <div className={`${generateHamburger}`}></div>
-          <div className={`${generateHamburger} w-3 ml-auto`}></div>
+        <button
+          className="flex flex-col h-12 w-12 justify-center items-center group"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <div className={`${generateHamburgerLine} ${isOpen && "rotate-45 translate-y-3 "}`} />
+          <div className={`${generateHamburgerLine} ${isOpen && "opacity-0"}`} />
+          <div className={`${generateHamburgerLine} ${isOpen && "-rotate-45 -translate-y-3"}`} />
         </button>
       </div>
       <div className="font-[Codystar] text-4xl md:text-7xl text-black text-center">Bloggy</div>
