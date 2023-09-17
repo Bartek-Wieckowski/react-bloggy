@@ -1,6 +1,8 @@
 import facebook from "../assets/icons/facebook-logo-thin.svg";
 import youtube from "../assets/icons/youtube-logo-thin.svg";
 import instagram from "../assets/icons/instagram-logo-thin.svg";
+import moon from "../assets/icons/moon-thin.svg";
+import sun from "../assets/icons/sun-thin.svg";
 import { useState } from "react";
 
 export default function Header() {
@@ -18,6 +20,10 @@ export default function Header() {
           <div className={`${generateHamburgerLine} ${isOpen && "opacity-0"}`} />
           <div className={`${generateHamburgerLine} ${isOpen && "-rotate-45 -translate-y-3"}`} />
         </button>
+      </div>
+      <div className="hidden md:flex">
+        <img src={sun} alt="toggle theme website" width={30} height={30} />
+        <img src={moon} alt="toggle theme website" width={30} height={30} />
       </div>
       <div className="font-[Codystar] text-4xl md:text-7xl text-black text-center">Bloggy</div>
       <div className="flex flex-col md:flex-row ">
