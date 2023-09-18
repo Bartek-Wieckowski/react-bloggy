@@ -34,7 +34,7 @@ export default function Header() {
           <img src={instagram} alt="company logo" width={30} height={30} />
         </div>
       </div>
-      <Navbar />
+      <Navbar isOpen={isOpen} />
     </>
   );
 }
