@@ -1,6 +1,6 @@
 
 export default function Home() {
   return (
-    <div>Home</div>
+    <div className="container mx-auto px-4 min-h-screen">Home</div>
   )
 }
