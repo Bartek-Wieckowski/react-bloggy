@@ -5,10 +5,12 @@ import moon from "../assets/icons/moon-thin.svg";
 import sun from "../assets/icons/sun-thin.svg";
 import { useState } from "react";
 import Navbar from "./Navbar";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const generateHamburgerLine = `h-1 w-6 my-1 rounded-full bg-black transition ease transform duration-300`;
+  const generateHamburgerLine = `h-1 w-6 my-1 rounded-full bg-black transition ease transform duration-300 dark:bg-gray-400`;
+  const { currentTheme, changeCurrentTheme } = useTheme();
 
   return (
     <>
@@ -23,12 +25,30 @@ export default function Header() {
             <div className={`${generateHamburgerLine} ${isOpen && "-rotate-45 -translate-y-3"}`} />
           </button>
         </div>
-        <div className="hidden md:flex">
-          <img src={sun} alt="toggle theme website" width={30} height={30} />
-          <img src={moon} alt="toggle theme website" width={30} height={30} />
+        <div className="hidden md:flex cursor-pointer">
+          {currentTheme === "dark" && (
+            <img
+              src={sun}
+              alt="toggle theme website"
+              width={30}
+              height={30}
+              onClick={() => changeCurrentTheme(currentTheme === "dark" ? "light" : "dark")}
+            />
+          )}
+          {currentTheme === "light" && (
+            <img
+              src={moon}
+              alt="toggle theme website"
+              width={30}
+              height={30}
+              onClick={() => changeCurrentTheme(currentTheme === "light" ? "dark" : "light")}
+            />
+          )}
         </div>
-        <div className="font-[Codystar] text-4xl md:text-7xl text-black text-center">Bloggy</div>
-        <div className="flex flex-col md:flex-row ">
+        <div className="font-[Codystar] text-4xl md:text-7xl text-center ">
+          Bloggy
+        </div>
+        <div className="flex flex-col md:flex-row">
           <img src={facebook} alt="company logo" width={30} height={30} />
           <img src={youtube} alt="company logo" width={30} height={30} />
           <img src={instagram} alt="company logo" width={30} height={30} />
