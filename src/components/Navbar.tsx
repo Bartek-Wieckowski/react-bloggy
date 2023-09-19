@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 type isOpenMenu = {
   isOpen: boolean;
@@ -22,11 +23,28 @@ const navLinks = [
 ];
 
 export default function Navbar({ isOpen }: isOpenMenu) {
-  return (
-    <nav className="md:mt-4 md:border-y-2 md:border-gray-800">
+  const ref = useRef<HTMLUListElement | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        // setIsScrolled(rect.top < 0);
+        setIsScrolled(window.scrollY > rect.top);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <nav className="md:mt-4 md:border-y-2 md:border-gray-800 dark:md:border-gray-400">
       {/* Desktop Menu */}
-      <ul className="hidden md:flex md:justify-center md:items-center md:gap-4 md:py-4">
+      <ul className="hidden md:container md:flex md:justify-center md:items-center md:gap-4 md:p-4 md:mx-auto">
         {navLinks.map((navItem) => (
           <li key={navItem.id} className="uppercase">
             <Link to={navItem.path}>{navItem.title}</Link>
@@ -36,11 +54,10 @@ export default function Navbar({ isOpen }: isOpenMenu) {
 
       {/* Mobile Menu */}
       <ul
+        ref={ref}
         className={`${
-          isOpen
-            ? "top-[110px] opacity-100 fixed min-h-screen bg-slate-50 flex flex-col justify-around pb-8 w-full text-center transition-all duration-200 md:hidden"
-            : "opacity-0 absolute -top-full md:hidden"
-        }`}
+          isOpen ? (isScrolled ? "top-0" : "top-[110px]") : "opacity-0 absolute -top-full"
+        } opacity-100 fixed h-[100%] bg-slate-50 flex flex-col justify-around pb-8 w-full text-center transition-all duration-200 md:hidden`}
       >
         {navLinks.map((navItem) => (
           <li key={navItem.id} className="uppercase text-5xl text-slate-800">
@@ -48,7 +65,6 @@ export default function Navbar({ isOpen }: isOpenMenu) {
           </li>
         ))}
       </ul>
-
     </nav>
   );
 }
