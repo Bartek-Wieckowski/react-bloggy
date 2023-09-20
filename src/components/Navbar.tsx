@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 type isOpenMenu = {
   isOpen: boolean;
+  onCloseMenu: () => void;
 };
 
 const navLinks = [
@@ -22,7 +23,7 @@ const navLinks = [
   },
 ];
 
-export default function Navbar({ isOpen }: isOpenMenu) {
+export default function Navbar({ isOpen, onCloseMenu }: isOpenMenu) {
   const ref = useRef<HTMLUListElement | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -30,7 +31,6 @@ export default function Navbar({ isOpen }: isOpenMenu) {
     const handleScroll = () => {
       if (ref.current) {
         const rect = ref.current.getBoundingClientRect();
-        // setIsScrolled(rect.top < 0);
         setIsScrolled(window.scrollY > rect.top);
       }
     };
@@ -61,7 +61,9 @@ export default function Navbar({ isOpen }: isOpenMenu) {
       >
         {navLinks.map((navItem) => (
           <li key={navItem.id} className="uppercase text-5xl text-slate-800">
-            <Link to={navItem.path}>{navItem.title}</Link>
+            <Link to={navItem.path} onClick={onCloseMenu}>
+              {navItem.title}
+            </Link>
           </li>
         ))}
       </ul>

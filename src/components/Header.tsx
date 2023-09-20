@@ -12,6 +12,10 @@ export default function Header() {
   const generateHamburgerLine = `h-1 w-6 my-1 rounded-full bg-black transition ease transform duration-300 dark:bg-gray-400`;
   const { currentTheme, changeCurrentTheme } = useTheme();
 
+  function onCloseMenu() {
+    setIsOpen(false);
+  }
+
   return (
     <>
       <div className="flex justify-between items-center container mx-auto px-4 pt-4">
@@ -45,16 +49,14 @@ export default function Header() {
             />
           )}
         </div>
-        <div className="font-[Codystar] text-4xl md:text-7xl text-center ">
-          Bloggy
-        </div>
+        <div className="font-[Codystar] text-4xl md:text-7xl text-center ">Bloggy</div>
         <div className="flex flex-col md:flex-row">
           <img src={facebook} alt="company logo" width={30} height={30} />
           <img src={youtube} alt="company logo" width={30} height={30} />
           <img src={instagram} alt="company logo" width={30} height={30} />
         </div>
       </div>
-      <Navbar isOpen={isOpen} />
+      <Navbar isOpen={isOpen} onCloseMenu={onCloseMenu} />
     </>
   );
 }
