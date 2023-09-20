@@ -9,6 +9,8 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 // context
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { AnimatePresence } from "framer-motion";
+
 
 function App() {
   return (
@@ -18,11 +20,13 @@ function App() {
           <Header />
         </Top>
         <Main>
+          <AnimatePresence>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
+          </AnimatePresence>
         </Main>
       </ThemeProvider>
     </BrowserRouter>

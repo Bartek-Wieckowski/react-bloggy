@@ -1,6 +1,13 @@
+import { motion } from "framer-motion";
+
 export default function Login() {
   return (
-    <div className="container mx-auto px-4">
+    <motion.div
+      className="container mx-auto px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <form>
         <div className="mb-6 max-w-md mx-auto">
           <label htmlFor="email" className="block mb-2 text-sm font-medium">
@@ -33,6 +40,6 @@ export default function Login() {
           </button>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 }
