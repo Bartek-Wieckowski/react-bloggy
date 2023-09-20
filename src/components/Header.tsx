@@ -29,7 +29,7 @@ export default function Header() {
             <div className={`${generateHamburgerLine} ${isOpen && "-rotate-45 -translate-y-3"}`} />
           </button>
         </div>
-        <div className="hidden md:flex cursor-pointer">
+        <div className="flex cursor-pointer">
           {currentTheme === "dark" && (
             <img
               src={sun}
